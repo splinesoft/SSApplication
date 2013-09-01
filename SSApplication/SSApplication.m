@@ -8,6 +8,10 @@
 
 #import "SSApplication.h"
 
+@interface SSApplication ()
+- (void) setupDefaultUserDefaults;
+@end
+
 @implementation SSApplication
 
 + (instancetype)sharedApplication {
@@ -16,6 +20,9 @@
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        // NSUserDefaults is thread-safe.
+        [self setupDefaultUserDefaults];
+        
         [self willLaunchBackgroundSetup];
     });
     
@@ -45,6 +52,35 @@
 
 - (void)willLaunchBackgroundSetup {
     // override me!
+}
+
+#pragma mark - Default NSUserDefaults
+
+- (NSDictionary *)defaultUserDefaults {
+    // override me!
+    return @{};
+}
+
+- (void)setupDefaultUserDefaults {    
+    NSDictionary *defaultUserDefaults = [self defaultUserDefaults];
+    
+    if( [defaultUserDefaults count] == 0 )
+        return;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSArray *prefKeys = [[defaults dictionaryRepresentation] allKeys];
+    
+    // Set default preferences, but don't overwrite any existing values.
+    [defaultUserDefaults enumerateKeysAndObjectsUsingBlock:^(NSString *pref,
+                                                             id defaultValue,
+                                                             BOOL *stop) {
+        if( ![prefKeys containsObject:pref] )
+            [defaults setObject:defaultValue
+                         forKey:pref];
+    }];
+    
+    // Force a synchronize, though this may not be strictly necessary
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark - App Events

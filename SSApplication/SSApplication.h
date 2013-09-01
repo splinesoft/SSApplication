@@ -33,6 +33,21 @@
  */
 - (void) willLaunchBackgroundSetup;
 
+#pragma mark - Default NSUserDefaults
+
+/**
+ * A handy way to set up default values in NSUserDefaults.
+ * Each key in the dictionary you specify is checked against the keys
+ * already in NSUserDefaults, and any existing keys will NOT be overwritten.
+ * This allows you to specify defaults for user preferences and 
+ * not overwrite any changes the user has made to those preferences.
+ * It also allows you to, perhaps in an update, introduce new preferences
+ * without having to worry about overwriting values in older preferences.
+ *
+ * Each key is the name of a preference, each object is the default value for that pref.
+ */
+- (NSDictionary *) defaultUserDefaults;
+
 #pragma mark - Events
 
 typedef NS_ENUM( NSUInteger, SSApplicationEvent ) {

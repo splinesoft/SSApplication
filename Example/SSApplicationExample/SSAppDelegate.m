@@ -47,11 +47,19 @@
             
             // here I might clean up core data
             break;
+        case SSApplicationEventDidReceiveMemoryWarning:
+            
+            // memory warning!
+            break;
         default:
             break;
     }
 }
 
-#pragma mark - other app delegate events
+- (NSDictionary *)defaultUserDefaults {
+    return @{
+        @"A-Preference" : @1337
+    };
+}
 
 @end

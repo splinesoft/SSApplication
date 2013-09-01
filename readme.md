@@ -1,6 +1,6 @@
 # SSApplication
 
-[![Build Status](https://travis-ci.org/splinesoft/SSApplication.png?branch=master)](https://travis-ci.org/splinesoft/SSApplication)
+![](http://cocoapod-badges.herokuapp.com/v/SSApplication/badge.png) &nbsp; ![](http://cocoapod-badges.herokuapp.com/p/SSApplication/badge.png) &nbsp; [![Build Status](https://travis-ci.org/splinesoft/SSApplication.png?branch=master)](https://travis-ci.org/splinesoft/SSApplication)
 
 A `UIApplication` subclass to start your app off right.
 
@@ -79,6 +79,23 @@ A `UIApplication` subclass to start your app off right.
         // that doesn't need to finish immediately
     }
     ```
+    
+# Default NSUserDefaults
+
+A handy way to set up default values in NSUserDefaults. Override `defaultUserDefaults` and return a dictionary.
+
+Each key in the dictionary you specify is checked against the keys already in `NSUserDefaults`, and any existing keys will NOT be overwritten. This allows you to specify defaults for user preferences and not overwrite any changes the user has made to those preferences.
+
+It also allows you to, perhaps in an app update, introduce new preferences without having to worry about overwriting values in existing preferences.
+
+```objc
+- (NSDictionary *) defaultUserDefaults {
+	return @{
+		@"A-Preference" : @1337,
+		@"Another-Pref" : @"Threeve",
+	};
+}
+```
 
 # Notifications
 
@@ -107,6 +124,11 @@ With `SSApplication`, several of these delegate calls are collapsed into a singl
             
             // here I might clean up core data
             break;
+            
+        case SSApplicationEventDidReceiveMemoryWarning:
+            
+            // memory warning!
+            break;    
             
         default:
             break;
