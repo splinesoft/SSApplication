@@ -23,6 +23,7 @@ A `UIApplication` subclass to start your app off right.
     #import <SSApplication.h>
 
     @interface MyAppDelegate : SSApplication
+    @end
     ```
 
 3. You'll need to make a small change in your app's `main.m` file to tell it about your new principal `UIApplication` subclass. Add your app delegate's class as the third argument to `UIApplicationMain`. Your `main.m` should look something like this:
