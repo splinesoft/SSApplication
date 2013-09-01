@@ -1,0 +1,5 @@
+platform :ios, '6.0'
+
+xcodeproj 'SSApplicationExample'
+
+pod 'SSApplication', :path => "../"
