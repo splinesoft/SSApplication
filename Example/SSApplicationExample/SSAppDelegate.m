@@ -24,27 +24,31 @@
     }
 }
 
-- (UIViewController *)rootViewController {
+- (UIViewController *) appRootViewController {
     // Return your root view controller here.
     return [UIViewController new];
 }
 
-- (void)receivedApplicationEvent:(NSString *)eventType {
-    NSLog(@"Received app event: %@", eventType);
+- (void)receivedApplicationEvent:(SSApplicationEvent)eventType {
+    NSLog(@"Received app event: %i", eventType);
     
-    if( [eventType isEqualToString:UIApplicationWillEnterForegroundNotification]
-       || [eventType isEqualToString:UIApplicationDidBecomeActiveNotification] ) {
-        
-        // here I generally do things like start up analytics
-    }
-    
-    if( [eventType isEqualToString:UIApplicationWillResignActiveNotification]
-       || [eventType isEqualToString:UIApplicationWillTerminateNotification]
-       || [eventType isEqualToString:UIApplicationDidEnterBackgroundNotification] ) {
-        
-        // Here I generally do things like shut down analytics, clean up core data, etc
-        
-        
+    switch( eventType ) {
+        case SSApplicationEventDidBecomeActive:
+        case SSApplicationEventWillEnterForeground:
+            
+            // here I might start up an analytics service
+            break;
+        case SSApplicationEventDidEnterBackground:
+        case SSApplicationEventWillResignActive:
+            
+            // here I might shut down an analytics service
+            break;
+        case SSApplicationEventWillTerminate:
+            
+            // here I might clean up core data
+            break;
+        default:
+            break;
     }
 }
 

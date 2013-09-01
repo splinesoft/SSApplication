@@ -47,21 +47,22 @@ A `UIApplication` subclass to start your app off right.
 
 `SSApplication` helps you set up your app at launch time by providing several methods you should override in your `SSApplication` subclass.
 
-The preferred way of setting up your application at launch time is by implementing the `UIApplicationDelegate` method `application:willFinishLaunchingWithOptions:`, not `application:didFinishLaunchingWithOptions:`.
-
-As of Xcode 4.6.3, the default project template still gets this wrong. For shame!
-
-1. Kindly tell `SSApplication` about your root view controller, which will be added to the main window (which `SSApplication` also creates for you).
+1. Kindly tell `SSApplication` about your root view controller, to be added to the main window (which `SSApplication` also creates for you).
 
     ```objc
-    - (UIViewController *) rootViewController {
+    - (UIViewController *) appRootViewController {
     	return [[UINavigationController alloc] initWithRootViewController:
-    			[[MyViewController alloc] init]];
+    			[MyViewController new]];
     }
     ```
 
 
-2. `SSApplication` asks if there's anything to do on the main thread at launch time:
+2. The preferred way of setting up your application at launch time is by implementing the `UIApplicationDelegate` method `application:willFinishLaunchingWithOptions:`, not `application:didFinishLaunchingWithOptions:`.
+
+    As of Xcode 4.6.3, the default project template still gets this wrong. For shame!
+    
+    `SSApplication` implements `application:willFinishLaunchingWithOptions:` and passes launch arguments to your app delegate:
+
 
     ```objc
     - (void) willFinishLaunchingWithOptions:(NSDictionary *)options {
@@ -88,36 +89,30 @@ The `UIApplicationDelegate` protocol informs your app delegate of a number of im
 
 With `SSApplication`, several of these delegate calls are collapsed into a single method you can override.
 
-`SSApplication` takes advantage of the fact that each of these delegate calls has a corresponding notification constant, and calls your method with one of these constants:
-
 ```objc
-UIApplicationWillEnterForegroundNotification
-UIApplicationWillTerminateNotification
-UIApplicationWillResignActiveNotification
-UIApplicationDidBecomeActiveNotification
-UIApplicationDidEnterBackgroundNotification
-UIApplicationDidReceiveMemoryWarningNotification
-```
+- (void) receivedApplicationEvent:(SSApplicationEvent)eventType {    
+    NSLog(@"Event received: %i", eventType);
 
-```objc
-- (void) receivedApplicationEvent:(NSString *)eventType {    
-    NSLog(@"Event received: %@", eventType);
-
-    if( [eventType isEqualToString:UIApplicationDidEnterBackgroundNotification]
-        || [eventType isEqualToString:UIApplicationWillResignActiveNotification] ) {
-        
-        // here I shut down my analytics services
-    }
-    
-    if( [eventType isEqualToString:UIApplicationWillEnterForegroundNotification] ) {
-        
-        // we're back in the foreground!
-    }
-
-    if( [eventType isEqualToString:UIApplicationWillTerminateNotification] ) {
-        
-        // About to terminate!
-        // Here I clean up core data and do other shutdown stuff
+    switch( eventType ) {
+        case SSApplicationEventDidBecomeActive:
+        case SSApplicationEventWillEnterForeground:
+            
+            // here I might start up an analytics service
+            break;
+            
+        case SSApplicationEventDidEnterBackground:
+        case SSApplicationEventWillResignActive:
+            
+            // here I might shut down an analytics service
+            break;
+            
+        case SSApplicationEventWillTerminate:
+            
+            // here I might clean up core data
+            break;
+            
+        default:
+            break;
     }
 }
 ```

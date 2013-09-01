@@ -23,7 +23,7 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor blackColor];
-    self.window.rootViewController = [self rootViewController];
+    self.window.rootViewController = [self appRootViewController];
     [self.window makeKeyAndVisible];
 
     return YES;
@@ -31,7 +31,7 @@
 
 #pragma mark - Setup
 
-- (UIViewController *)rootViewController {
+- (UIViewController *) appRootViewController {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:[NSString stringWithFormat:
                                            @"Did you forget to override %@?",
@@ -49,32 +49,32 @@
 
 #pragma mark - App Events
 
-- (void)receivedApplicationEvent:(NSString *)eventType {
+- (void)receivedApplicationEvent:(SSApplicationEvent)eventType {
     // override me!
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    [self receivedApplicationEvent:UIApplicationWillEnterForegroundNotification];
+    [self receivedApplicationEvent:SSApplicationEventWillEnterForeground];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [self receivedApplicationEvent:UIApplicationWillTerminateNotification];
+    [self receivedApplicationEvent:SSApplicationEventWillTerminate];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    [self receivedApplicationEvent:UIApplicationDidBecomeActiveNotification];
+    [self receivedApplicationEvent:SSApplicationEventDidBecomeActive];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    [self receivedApplicationEvent:UIApplicationWillResignActiveNotification];
+    [self receivedApplicationEvent:SSApplicationEventWillResignActive];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    [self receivedApplicationEvent:UIApplicationDidEnterBackgroundNotification];
+    [self receivedApplicationEvent:SSApplicationEventDidEnterBackground];
 }
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
-    [self receivedApplicationEvent:UIApplicationDidReceiveMemoryWarningNotification];
+    [self receivedApplicationEvent:SSApplicationEventDidReceiveMemoryWarning];
 }
 
 @end

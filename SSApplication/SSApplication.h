@@ -19,7 +19,7 @@
 /**
  * Override me to specify the view controller set for the main window.
  */
-- (UIViewController *) rootViewController;
+- (UIViewController *) appRootViewController;
 
 /**
  * Set up your application at launch. This method runs on the main thread.
@@ -41,20 +41,19 @@
 
 #pragma mark - Events
 
+typedef NS_ENUM( NSUInteger, SSApplicationEvent ) {
+    SSApplicationEventWillEnterForeground,
+    SSApplicationEventWillTerminate,
+    SSApplicationEventWillResignActive,
+    SSApplicationEventDidBecomeActive,
+    SSApplicationEventDidEnterBackground,
+    SSApplicationEventDidReceiveMemoryWarning,
+};
+
 /**
  * This method is called when the delegate receives application events.
  * With this function you can collapse a number of similar implementations into one place.
- *
- * Valid eventTypes include:
- *
- * UIApplicationWillEnterForegroundNotification
- * UIApplicationWillTerminateNotification
- * UIApplicationWillResignActiveNotification
- *
- * UIApplicationDidBecomeActiveNotification
- * UIApplicationDidEnterBackgroundNotification
- * UIApplicationDidReceiveMemoryWarningNotification
  */
-- (void) receivedApplicationEvent:(NSString *)eventType;
+- (void) receivedApplicationEvent:(SSApplicationEvent)eventType;
 
 @end
