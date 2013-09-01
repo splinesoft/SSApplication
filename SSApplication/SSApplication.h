@@ -23,12 +23,6 @@
 
 /**
  * Set up your application at launch. This method runs on the main thread.
- *
- * The preferred way of setting up your application at launch time is
- * via `application:willFinishLaunchingWithOptions:`.
- * 
- * As of Xcode 4.6.3, default applications still use the old
- * `application:didFinishLaunchingWithOptions:`. For shame!
  */
 - (void) willFinishLaunchingWithOptions:(NSDictionary *)options;
 

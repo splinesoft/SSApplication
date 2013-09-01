@@ -58,11 +58,7 @@ A `UIApplication` subclass to start your app off right.
     ```
 
 
-2. The preferred way of setting up your application at launch time is by implementing the `UIApplicationDelegate` method `application:willFinishLaunchingWithOptions:`, not `application:didFinishLaunchingWithOptions:`.
-
-    As of Xcode 4.6.3, the default project template still gets this wrong. For shame!
-    
-    `SSApplication` implements `application:willFinishLaunchingWithOptions:` and passes launch arguments to your app delegate:
+2. `SSApplication` implements `application:willFinishLaunchingWithOptions:` and passes launch arguments to your app delegate:
 
 
     ```objc
