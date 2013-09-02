@@ -78,9 +78,6 @@
             [defaults setObject:defaultValue
                          forKey:pref];
     }];
-    
-    // Force a synchronize, though this may not be strictly necessary
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark - App Events
