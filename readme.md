@@ -1,6 +1,6 @@
 # SSApplication
 
-![](http://cocoapod-badges.herokuapp.com/v/SSApplication/badge.png) &nbsp; ![](http://cocoapod-badges.herokuapp.com/p/SSApplication/badge.png) &nbsp; [![Build Status](https://travis-ci.org/splinesoft/SSApplication.png?branch=master)](https://travis-ci.org/splinesoft/SSApplication)
+[![Build Status](https://travis-ci.org/splinesoft/SSApplication.png?branch=master)](https://travis-ci.org/splinesoft/SSApplication)
 
 A `UIApplication` subclass to start your app off right.
 
