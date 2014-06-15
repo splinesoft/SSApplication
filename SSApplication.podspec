@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "SSApplication"
-  s.version      = "0.0.2"
+  s.version      = "0.1.0"
   s.summary      = "A UIApplication subclass to start your app off right."
   s.homepage     = "https://github.com/splinesoft/SSApplication"
   s.license      = { :type => 'MIT', :file => 'LICENSE'  }
@@ -10,4 +10,5 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.source_files = 'SSApplication/*.{h,m}'
   s.frameworks   = 'UIKit'
+  s.social_media_url = "https://twitter.com/jhersh"
 end

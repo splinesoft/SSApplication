@@ -9,7 +9,7 @@
 #import "SSApplication.h"
 
 @interface SSApplication ()
-- (void) setupDefaultUserDefaults;
+- (void) _setupDefaultUserDefaults;
 @end
 
 @implementation SSApplication
@@ -21,16 +21,16 @@
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         // NSUserDefaults is thread-safe.
-        [self setupDefaultUserDefaults];
+        [self _setupDefaultUserDefaults];
         
-        [self willLaunchBackgroundSetup];
+        [self ss_willLaunchBackgroundSetup];
     });
     
-    [self willFinishLaunchingWithOptions:launchOptions];
+    [self ss_willFinishLaunchingWithOptions:launchOptions];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor blackColor];
-    self.window.rootViewController = [self appRootViewController];
+    self.window.rootViewController = [self ss_appRootViewController];
     [self.window makeKeyAndVisible];
 
     return YES;
@@ -38,34 +38,34 @@
 
 #pragma mark - Setup
 
-- (UIViewController *) appRootViewController {
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                   reason:[NSString stringWithFormat:
-                                           @"Did you forget to override %@?",
-                                           NSStringFromSelector(_cmd)]
-                                 userInfo:nil];
+- (UIViewController *) ss_appRootViewController {
+    // override me!
+    // Not providing a default view controller will raise an exception.
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
 }
 
-- (void)willFinishLaunchingWithOptions:(NSDictionary *)options {
+- (void) ss_willFinishLaunchingWithOptions:(NSDictionary *)options {
     // override me!
 }
 
-- (void)willLaunchBackgroundSetup {
+- (void) ss_willLaunchBackgroundSetup {
     // override me!
 }
 
 #pragma mark - Default NSUserDefaults
 
-- (NSDictionary *)defaultUserDefaults {
+- (NSDictionary *) ss_defaultUserDefaults {
     // override me!
     return @{};
 }
 
-- (void)setupDefaultUserDefaults {    
-    NSDictionary *defaultUserDefaults = [self defaultUserDefaults];
+- (void) _setupDefaultUserDefaults {
+    NSDictionary *defaultUserDefaults = [self ss_defaultUserDefaults];
     
-    if( [defaultUserDefaults count] == 0 )
+    if ([defaultUserDefaults count] == 0) {
         return;
+    }
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSArray *prefKeys = [[defaults dictionaryRepresentation] allKeys];
@@ -74,40 +74,41 @@
     [defaultUserDefaults enumerateKeysAndObjectsUsingBlock:^(NSString *pref,
                                                              id defaultValue,
                                                              BOOL *stop) {
-        if( ![prefKeys containsObject:pref] )
+        if (![prefKeys containsObject:pref]) {
             [defaults setObject:defaultValue
                          forKey:pref];
+        }
     }];
 }
 
 #pragma mark - App Events
 
-- (void)receivedApplicationEvent:(SSApplicationEvent)eventType {
+- (void) ss_receivedApplicationEvent:(SSApplicationEvent)eventType {
     // override me!
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    [self receivedApplicationEvent:SSApplicationEventWillEnterForeground];
+    [self ss_receivedApplicationEvent:SSApplicationEventWillEnterForeground];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [self receivedApplicationEvent:SSApplicationEventWillTerminate];
+    [self ss_receivedApplicationEvent:SSApplicationEventWillTerminate];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    [self receivedApplicationEvent:SSApplicationEventDidBecomeActive];
+    [self ss_receivedApplicationEvent:SSApplicationEventDidBecomeActive];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    [self receivedApplicationEvent:SSApplicationEventWillResignActive];
+    [self ss_receivedApplicationEvent:SSApplicationEventWillResignActive];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    [self receivedApplicationEvent:SSApplicationEventDidEnterBackground];
+    [self ss_receivedApplicationEvent:SSApplicationEventDidEnterBackground];
 }
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
-    [self receivedApplicationEvent:SSApplicationEventDidReceiveMemoryWarning];
+    [self ss_receivedApplicationEvent:SSApplicationEventDidReceiveMemoryWarning];
 }
 
 @end

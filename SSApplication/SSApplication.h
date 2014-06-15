@@ -10,8 +10,14 @@
 
 @interface SSApplication : UIApplication <UIApplicationDelegate>
 
+/**
+ *  Access the shared application.
+ */
 + (instancetype) sharedApplication;
 
+/**
+ *  The main application window. SSApplication creates this for you at app launch.
+ */
 @property (nonatomic, strong) UIWindow *window;
 
 #pragma mark - Setup
@@ -19,19 +25,19 @@
 /**
  * Override me to specify the view controller set for the main window.
  */
-- (UIViewController *) appRootViewController;
+- (UIViewController *) ss_appRootViewController;
 
 /**
  * Set up your application at launch. This method runs on the main thread.
  */
-- (void) willFinishLaunchingWithOptions:(NSDictionary *)options;
+- (void) ss_willFinishLaunchingWithOptions:(NSDictionary *)options;
 
 /**
  * This method is called asynchronously on a background queue
  * at the start of `application:willFinishLaunchingWithOptions:`.
  * Any long-running or background setup can go here.
  */
-- (void) willLaunchBackgroundSetup;
+- (void) ss_willLaunchBackgroundSetup;
 
 #pragma mark - Default NSUserDefaults
 
@@ -46,11 +52,11 @@
  *
  * Each key is the name of a preference, each object is the default value for that pref.
  */
-- (NSDictionary *) defaultUserDefaults;
+- (NSDictionary *) ss_defaultUserDefaults;
 
 #pragma mark - Events
 
-typedef NS_ENUM( NSUInteger, SSApplicationEvent ) {
+typedef NS_ENUM (NSUInteger, SSApplicationEvent) {
     SSApplicationEventWillEnterForeground,
     SSApplicationEventWillTerminate,
     SSApplicationEventWillResignActive,
@@ -61,8 +67,8 @@ typedef NS_ENUM( NSUInteger, SSApplicationEvent ) {
 
 /**
  * This method is called when the delegate receives application events.
- * With this function you can collapse a number of similar implementations into one place.
+ * Override this function to centralize event handling in one place.
  */
-- (void) receivedApplicationEvent:(SSApplicationEvent)eventType;
+- (void) ss_receivedApplicationEvent:(SSApplicationEvent)eventType;
 
 @end

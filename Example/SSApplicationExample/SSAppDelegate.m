@@ -12,25 +12,25 @@
 
 #pragma mark - SSApplication
 
-- (void)willFinishLaunchingWithOptions:(NSDictionary *)options {
+- (void)ss_willFinishLaunchingWithOptions:(NSDictionary *)options {
     NSLog(@"Standard application setup should go here.");
 }
 
-- (void)willLaunchBackgroundSetup {
-    if( [NSThread isMainThread] ) {
+- (void)ss_willLaunchBackgroundSetup {
+    if ([NSThread isMainThread]) {
         // this will never happen
     } else {
         NSLog(@"This setup is not on the main thread!");
     }
 }
 
-- (UIViewController *) appRootViewController {
-    // Return your root view controller here.
+- (UIViewController *) ss_appRootViewController {
+    // Create a default view controller here.
     return [UIViewController new];
 }
 
-- (void)receivedApplicationEvent:(SSApplicationEvent)eventType {
-    NSLog(@"Received app event: %i", eventType);
+- (void)ss_receivedApplicationEvent:(SSApplicationEvent)eventType {
+    NSLog(@"Received app event: %@", @(eventType));
     
     switch( eventType ) {
         case SSApplicationEventDidBecomeActive:
@@ -38,27 +38,32 @@
             
             // here I might start up an analytics service
             break;
+            
         case SSApplicationEventDidEnterBackground:
         case SSApplicationEventWillResignActive:
             
             // here I might shut down an analytics service
             break;
+            
         case SSApplicationEventWillTerminate:
             
             // here I might clean up core data
             break;
+            
         case SSApplicationEventDidReceiveMemoryWarning:
             
             // memory warning!
             break;
+            
         default:
+            
             break;
     }
 }
 
-- (NSDictionary *)defaultUserDefaults {
+- (NSDictionary *) ss_defaultUserDefaults {
     return @{
-        @"A-Preference" : @1337
+        @"A-Preference-With-A-Default-Value" : @1337
     };
 }
 
