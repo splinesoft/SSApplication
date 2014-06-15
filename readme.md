@@ -46,12 +46,12 @@ A `UIApplication` subclass to start your app off right.
 
 # App Launch
 
-`SSApplication` helps you set up your app at launch time by providing several methods you should override in your `SSApplication` subclass.
+`SSApplication` helps set up your app at launch time by providing several methods you should override in your `SSApplication` subclass.
 
-1. Kindly tell `SSApplication` about your root view controller, to be added to the main window (which `SSApplication` also creates for you).
+1. Kindly tell `SSApplication` about your root view controller, to be added to the main window (`SSApplication` creates a main application window for you).
 
     ```objc
-    - (UIViewController *) appRootViewController {
+    - (UIViewController *) ss_appRootViewController {
     	return [[UINavigationController alloc] initWithRootViewController:
     			[MyViewController new]];
     }
@@ -62,7 +62,7 @@ A `UIApplication` subclass to start your app off right.
 
 
     ```objc
-    - (void) willFinishLaunchingWithOptions:(NSDictionary *)options {
+    - (void) ss_willFinishLaunchingWithOptions:(NSDictionary *)options {
      
         // Here I start analytics or other third party services
     }
@@ -71,10 +71,9 @@ A `UIApplication` subclass to start your app off right.
 3. `SSApplication` asks if there's any long-running setup to be performed on a background queue.
 
     ```objc
-    - (void) willLaunchBackgroundSetup {
+    - (void) ss_willLaunchBackgroundSetup {
         // This method is called asynchronously
         // on a background queue.
-        
         // Here I do long-running setup
         // that doesn't need to finish immediately
     }
@@ -82,14 +81,14 @@ A `UIApplication` subclass to start your app off right.
     
 # Default NSUserDefaults
 
-A handy way to set up default values in NSUserDefaults. Override `defaultUserDefaults` and return a dictionary.
+A handy way to set up default values in NSUserDefaults. Override `ss_defaultUserDefaults` and return a dictionary.
 
 Each key in the dictionary you specify is checked against the keys already in `NSUserDefaults`, and any existing keys will NOT be overwritten. This allows you to specify defaults for user preferences and not overwrite any changes the user has made to those preferences.
 
-It also allows you to, perhaps in an app update, introduce new preferences without having to worry about overwriting values in existing preferences.
+It also allows you to introduce new preferences in an app update without having to worry about overwriting values in existing preferences.
 
 ```objc
-- (NSDictionary *) defaultUserDefaults {
+- (NSDictionary *) ss_defaultUserDefaults {
 	return @{
 		@"A-Preference" : @1337,
 		@"Another-Pref" : @"Threeve",
@@ -104,10 +103,10 @@ The `UIApplicationDelegate` protocol informs your app delegate of a number of im
 With `SSApplication`, several of these delegate calls are collapsed into a single method you can override.
 
 ```objc
-- (void) receivedApplicationEvent:(SSApplicationEvent)eventType {    
+- (void) ss_receivedApplicationEvent:(SSApplicationEvent)eventType {    
     NSLog(@"Event received: %i", eventType);
 
-    switch( eventType ) {
+    switch (eventType) {
         case SSApplicationEventDidBecomeActive:
         case SSApplicationEventWillEnterForeground:
             
