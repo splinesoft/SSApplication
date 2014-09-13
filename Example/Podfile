@@ -2,4 +2,4 @@ platform :ios, '6.0'
 
 xcodeproj 'SSApplicationExample'
 
-pod 'SSApplication', :path => "../"
+pod 'SSApplication', :path => "../SSApplication.podspec"

@@ -19,19 +19,19 @@
 }
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         // NSUserDefaults is thread-safe.
         [self _setupDefaultUserDefaults];
         
         [self ss_willLaunchBackgroundSetup];
     });
     
-    [self ss_willFinishLaunchingWithOptions:launchOptions];
-    
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor blackColor];
     self.window.rootViewController = [self ss_appRootViewController];
     [self.window makeKeyAndVisible];
+    
+    [self ss_willFinishLaunchingWithOptions:launchOptions];
 
     return YES;
 }
