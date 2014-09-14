@@ -19,6 +19,7 @@
 - (void)ss_willLaunchBackgroundSetup {
     if ([NSThread isMainThread]) {
         // this will never happen
+        exit(1);
     } else {
         NSLog(@"This setup is not on the main thread!");
     }
