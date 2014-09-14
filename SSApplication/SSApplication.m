@@ -26,12 +26,12 @@
         [self ss_willLaunchBackgroundSetup];
     });
     
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [self ss_willFinishLaunchingWithOptions:launchOptions];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor blackColor];
     self.window.rootViewController = [self ss_appRootViewController];
     [self.window makeKeyAndVisible];
-    
-    [self ss_willFinishLaunchingWithOptions:launchOptions];
 
     return YES;
 }

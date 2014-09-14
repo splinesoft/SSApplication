@@ -10,20 +10,6 @@
 	<string>46</string>
 	<key>objects</key>
 	<dict>
-		<key>0D9BDBC01C690CD9D33AFB23</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CDC3CF44B72C29C9D9573608</string>
-				<string>AAE620D7BDB5186023053990</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>41E6A7A1B4E641FC966FC2E3</key>
 		<dict>
 			<key>explicitFileType</key>
@@ -61,6 +47,21 @@
 			<key>showEnvVarsInLog</key>
 			<string>0</string>
 		</dict>
+		<key>5BA51B7CABC56FF47EB5A41F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods.release.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods/Pods.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>5DFB27943E7945BCA449A76C</key>
 		<dict>
 			<key>fileRef</key>
@@ -75,7 +76,7 @@
 				<string>5E2FDD8517D2DE8E00BE4636</string>
 				<string>5E2FDD7E17D2DE8E00BE4636</string>
 				<string>5E2FDD7D17D2DE8E00BE4636</string>
-				<string>0D9BDBC01C690CD9D33AFB23</string>
+				<string>A00167D543EEADEAD9E49C7D</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -627,7 +628,7 @@
 		<key>5E2FDDA317D2DE8E00BE4636</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>CDC3CF44B72C29C9D9573608</string>
+			<string>BE7752727CA5EED0EEED94F3</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER</key>
@@ -709,7 +710,7 @@
 		<key>5E2FDDA417D2DE8E00BE4636</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>AAE620D7BDB5186023053990</string>
+			<string>5BA51B7CABC56FF47EB5A41F</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER</key>
@@ -788,22 +789,21 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>AAE620D7BDB5186023053990</key>
+		<key>A00167D543EEADEAD9E49C7D</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>children</key>
+			<array>
+				<string>BE7752727CA5EED0EEED94F3</string>
+				<string>5BA51B7CABC56FF47EB5A41F</string>
+			</array>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
+			<string>PBXGroup</string>
 			<key>name</key>
-			<string>Pods.release.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods/Pods.release.xcconfig</string>
+			<string>Pods</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>CDC3CF44B72C29C9D9573608</key>
+		<key>BE7752727CA5EED0EEED94F3</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
