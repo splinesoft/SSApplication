@@ -1,6 +1,3 @@
-#Dropbox conflicted copies
-*conflicted copy*
-
 #Ignore the Mac OS X .DS_Store files
 .DS_Store
 
@@ -12,19 +9,12 @@
 *.xcworkspace
 xcuserdata
 
-#Ignore textmate build errors
-*.tm_build_errors
-
 #Ignore temp nibs and swap files
 *.swp
 *~.nib
-
-#Ignore the build, since we don't want archived builds
 build
 
 .gitattributes
-
-#Probably don't want to check in xcuserdata
 xcuserdata/
 *.xcworkspace/
 
@@ -32,4 +22,3 @@ xcuserdata/
 
 DerivedData
 Pods
-Podfile.lock

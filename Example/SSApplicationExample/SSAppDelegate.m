@@ -12,11 +12,11 @@
 
 #pragma mark - SSApplication
 
-- (void)ss_willFinishLaunchingWithOptions:(NSDictionary *)options {
+- (void) ss_willFinishLaunchingWithOptions:(NSDictionary *)options {
     NSLog(@"Standard application setup should go here.");
 }
 
-- (void)ss_willLaunchBackgroundSetup {
+- (void) ss_willLaunchBackgroundSetup {
     if ([NSThread isMainThread]) {
         // this will never happen
         exit(1);
@@ -30,7 +30,7 @@
     return [UIViewController new];
 }
 
-- (void)ss_receivedApplicationEvent:(SSApplicationEvent)eventType {
+- (void) ss_receivedApplicationEvent:(SSApplicationEvent)eventType {
     NSLog(@"Received app event: %@", @(eventType));
     
     switch( eventType ) {

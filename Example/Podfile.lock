@@ -1,0 +1,14 @@
+PODS:
+  - SSApplication (0.3.0)
+
+DEPENDENCIES:
+  - SSApplication (from `../SSApplication.podspec`)
+
+EXTERNAL SOURCES:
+  SSApplication:
+    :path: ../SSApplication.podspec
+
+SPEC CHECKSUMS:
+  SSApplication: c1e2adb850c0603bf7fb9c2abdbfa5ef0e0dbd4d
+
+COCOAPODS: 0.34.0.rc2
