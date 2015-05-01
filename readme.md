@@ -1,6 +1,6 @@
 # SSApplication
 
-[![Build Status](https://travis-ci.org/splinesoft/SSApplication.png?branch=master)](https://travis-ci.org/splinesoft/SSApplication)
+[![Circle CI](https://circleci.com/gh/splinesoft/SSApplication.svg?style=svg)](https://circleci.com/gh/splinesoft/SSApplication)
 
 A `UIApplication` subclass to start your app off right.
 
