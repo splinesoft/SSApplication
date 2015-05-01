@@ -6,9 +6,9 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   SSApplication:
-    :path: ../SSApplication.podspec
+    :path: "../SSApplication.podspec"
 
 SPEC CHECKSUMS:
-  SSApplication: c1e2adb850c0603bf7fb9c2abdbfa5ef0e0dbd4d
+  SSApplication: a3eb1254ba6b7a11d1c022fd060041f3d4b1fee8
 
-COCOAPODS: 0.34.1
+COCOAPODS: 0.36.4
