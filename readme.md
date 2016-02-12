@@ -8,7 +8,7 @@ A `UIApplication` subclass to start your app off right.
 
 # Setup
 
-1. Install with [Cocoapods](http://cocoapods.org/). Add to your Podfile:
+1. Install with [CocoaPods](http://cocoapods.org/). Add to your Podfile:
 
     ```
     pod 'SSApplication', :head # YOLO
